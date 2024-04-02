@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--────────────────────────────────-->
+    <!--──────▮─Light─Theme────────────-->
+    <!--────────────────────────────────-->
+    <!---    Text     -->
+    <color name="text">#151515</color>
+    <color name="text_secondary">#515151</color>
+    <color name="text_subtitle">#A1A1A1</color>
+    <!---    Main     -->
+    <color name="main_blue">#172E73</color>
+    <color name="secondary">#DEE6FF</color>
+    <color name="secondary_lighter">#F2F5FF</color>
+    <color name="bg_color">#FFFFFF</color>
+    <!---    Border   -->
+    <color name="error">#BF2626</color>
+    <color name="active">#172E73</color>
+    <color name="default_border">#DFDFDF</color>
+    <!---    States   -->
+    <!---    └ Dangerous      -->
+    <color name="dangerous_m">#BF2626</color>
+    <color name="dangerous_s">#FFE5E5</color>
+    <!---    └ Successful     -->
+    <color name="successful_m">#307322</color>
+    <color name="successful_s">#CCFFCC</color>
+    <!---    └ Warning        -->
+    <color name="warning_m">#A53B0A</color>
+    <color name="warning_s">#FFDFB8</color>
+    <color name="waiting">#EFB921</color>
+    <!---    └ Disabled       -->
+    <color name="disabled_m">#8B96B9</color>
+    <color name="disabled_s">#8A8A8A</color>
+    <color name="disabled_btn">#DFDFDF</color>
+    <color name="bg_white">#80FFFFFF</color>
+    <color name="bg_blue_light">#80DEE6FF</color>
+    <!--────────────────────────────────-->
+    <!--───────▯─Dark─Theme─────────────-->
+</resources>

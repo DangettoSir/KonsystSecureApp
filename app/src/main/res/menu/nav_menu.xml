@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:title="Настройки" android:id="@+id/item1" android:icon="@drawable/settings" android:iconTint="@color/main_blue"/>
+    <item android:title="Техподдержка" android:id="@+id/item2" android:icon="@drawable/support" android:iconTint="@color/main_blue"/>
+    <item android:title="О приложении" android:id="@+id/item3" android:icon="@drawable/info_circle" android:iconTint="@color/main_blue"/>
+    <item android:title="Темная тема" android:id="@+id/item4" android:icon="@drawable/moon" android:iconTint="@color/main_blue" app:actionLayout="@layout/switch_item" />
+</menu>
