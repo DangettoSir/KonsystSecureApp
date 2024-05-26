@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_scenario_rounded"
+    android:layout_width="match_parent"
+    android:backgroundTint="@color/bg_color"
+    android:layout_marginTop="16dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:fontFamily="@font/rubik_medium"
+        android:layout_width="match_parent"
+        android:textColor="@color/text"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvDate"
+            android:fontFamily="@font/rubik_regular"
+            android:textSize="14sp"
+            android:textColor="@color/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="1.6dp"
+            app:drawableStartCompat="@drawable/clock_small" />
+        <TextView
+            android:id="@+id/tvAttachments"
+            android:text="4"
+            android:textColor="@color/text"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:visibility="gone"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="1.6dp"
+            app:drawableStartCompat="@drawable/paperclip" />
+        <ImageView
+            android:id="@+id/tvComment"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:src="@drawable/comment"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

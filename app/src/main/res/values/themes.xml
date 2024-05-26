@@ -4,8 +4,11 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/bg_color</item>
+        <item name="android:background">@color/bg_color</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryVariant">@color/bg_color</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.KonsystSecureApp" parent="Base.Theme.KonsystSecureApp" />

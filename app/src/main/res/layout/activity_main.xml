@@ -9,8 +9,6 @@
     tools:context=".MainActivity"
     tools:menu="@menu/nav_menu">
     <!--tools:openDrawer="start"-->
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_content"
         android:layout_width="match_parent"
@@ -27,10 +25,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/notificationCount"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:background="@drawable/badge_background"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/main_toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/main_toolbar"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="@+id/main_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/main_toolbar"
+            app:layout_constraintVertical_bias="0.35" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="12dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,38 +58,51 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/avatar"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/avatar_example" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
+                    <ImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/avatar_example"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:background="@android:color/transparent"
+                        android:id="@+id/avatarText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/avatar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textSize="17sp"
+                        app:layout_constraintTop_toTopOf="@+id/avatar" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
                     <TextView
                         android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
                         android:fontFamily="@font/rubik_medium"
-                        android:text="Олег Борисов"
                         android:textColor="@color/text"
                         android:textSize="17sp" />
-
                     <TextView
                         android:id="@+id/nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
                         android:fontFamily="@font/rubik_regular"
-                        android:text="@string/nickname"
                         android:textColor="@color/text_subtitle"
                         android:textSize="13sp" />
-
                 </LinearLayout>
-
                 <ImageButton
                     android:id="@+id/imageButton"
                     android:layout_width="48dp"
@@ -80,30 +110,25 @@
                     android:layout_marginStart="24dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/chevron_right" />
-
             </LinearLayout>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/eventtext"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_semibold"
                     android:text="Мероприятия"
                     android:textColor="@color/text"
-                    android:fontFamily="@font/rubik_semibold"
-                    android:textSize="20sp"/>
-
+                    android:textSize="20sp" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
-
                     <Button
                         android:id="@+id/allbtn"
                         android:layout_width="wrap_content"
@@ -113,31 +138,59 @@
                         android:text="Все"
                         android:textColor="@color/bg_color"
                         android:textSize="15sp" />
-
                     <Button
                         android:id="@+id/recentbtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
-                        android:textColor="@color/text"
                         android:backgroundTint="@color/secondary_lighter"
                         android:text="Недавние"
-                        android:textSize="15sp"/>
-
+                        android:textColor="@color/text"
+                        android:textSize="15sp" />
                     <Button
                         android:id="@+id/expiresbtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/secondary_lighter"
-                        android:textColor="@color/text"
                         android:text="Срок истекает"
-                        android:textSize="15sp"/>
+                        android:textColor="@color/text"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
+        <TextView
+            android:id="@+id/eventtextempty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_regular"
+            android:visibility="gone"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Мероприятий на текущий момент нет."
+            android:textColor="@color/text_subtitle"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.19999999" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_burger"
@@ -155,6 +208,4 @@
         app:itemIconSize="20dp"
         app:itemIconPadding="12dp"
         app:itemHorizontalPadding="20dp"/>
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

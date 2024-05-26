@@ -24,7 +24,7 @@
         android:fontFamily="@font/rubik_regular"
         android:text="Уведомления"
         android:textColor="@color/text"
-        android:textSize="15sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/notice_toolbar"
         app:layout_constraintEnd_toEndOf="@+id/notice_toolbar"
         app:layout_constraintStart_toStartOf="@+id/notice_toolbar"

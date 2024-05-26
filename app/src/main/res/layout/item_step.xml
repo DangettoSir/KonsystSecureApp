@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="18dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_regular"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:fontFamily="@font/rubik_medium"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/actions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNotificationPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            android:fontFamily="@font/rubik_regular"
+            android:text="Добавьте до 3 фотографий"
+            android:textColor="@color/text_subtitle"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/actionsphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/image_add_rounded"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:src="@drawable/photo_add"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/image_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/image_add"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_add_rounded"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/image_add_rounded" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/photoImageView1"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                />
+            <ImageView
+                android:id="@+id/photoImageView2"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                />
+            <ImageView
+                android:id="@+id/photoImageView3"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNotificationVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Добавьте видео - не более 3 минут"
+            android:textColor="@color/text_subtitle"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/actionsvideo"
+                android:layout_width="wrap_content"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/video_add_rounded"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:src="@drawable/photo_add"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/video_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/video_add"
+                    app:layout_constraintBottom_toBottomOf="@+id/video_add_rounded"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/video_add_rounded" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/videoView"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/photo_add" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -24,7 +24,7 @@
         android:fontFamily="@font/rubik_regular"
         android:text="Техподдержка"
         android:textColor="@color/text"
-        android:textSize="15sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/support_toolbar"
         app:layout_constraintEnd_toEndOf="@+id/support_toolbar"
         app:layout_constraintStart_toStartOf="@+id/support_toolbar"
