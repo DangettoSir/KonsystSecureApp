@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsystsecureapp.Preferences.PreferenceManager
@@ -20,6 +22,8 @@ import com.google.gson.reflect.TypeToken
 class EventActivity : AppCompatActivity() {
     private var networkService = NetworkService()
     private lateinit var binding: ActivityEventBinding
+    private lateinit var progressBar: ProgressBar
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
     private lateinit var scenarioAdapter: ScenarioAdapter
     private val scenarioList = mutableListOf<Scenario>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,20 +33,28 @@ class EventActivity : AppCompatActivity() {
         val bundle = intent.extras
         val eventTitle = bundle?.getString("eventTitle")
         PreferenceManager.init(this)
+        progressBar = binding.progressBar
+        showProgressBar()
         networkService.isTokenValid { isValid, message ->
+            showProgressBar()
             if (isValid) {
+                hideProgressBar()
             } else {
+                hideProgressBar()
                 val intent = Intent(this@EventActivity, Auth::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
             }
         }
+
         binding.rvScenarios.layoutManager = LinearLayoutManager(this)
         val searchQuery = PreferenceManager.getEventId()
         if (searchQuery != null) {
+            showProgressBar()
             networkService.searchScenarios(searchQuery) { success, message ->
                 if (success) {
+
                     val scenarios = message?.let { message ->
                         parseScenariosFromJson(message)
                     } ?: emptyList()
@@ -51,23 +63,28 @@ class EventActivity : AppCompatActivity() {
                         Log.i("ОПА", scenarios.toString())
                         scenarioList.clear()
                         scenarioList.addAll(scenarios)
-                        scenarioAdapter = ScenarioAdapter(scenarioList, this@EventActivity) { scenarioId ->
+                        scenarioAdapter = ScenarioAdapter(scenarioList, this@EventActivity, R.layout.item_scenario) { scenarioId ->
                             PreferenceManager.saveScenarioId(scenarioId)
                         }
                         binding.rvScenarios.adapter = scenarioAdapter
+                        hideProgressBar()
                         if (scenarioList.isEmpty()) {
                             noScenariosText.visibility = View.VISIBLE
                             binding.rvScenarios.visibility = View.GONE
+                            binding.svScenarios.visibility = View.GONE
                         } else{
                             noScenariosText.visibility = View.GONE
+                            binding.svScenarios.visibility = View.VISIBLE
                             binding.rvScenarios.visibility = View.VISIBLE
                         }
                     }
                 } else {
+                    hideProgressBar()
                     val noScenariosText = binding.scenariotextempty
                     runOnUiThread {
                         noScenariosText.visibility = View.VISIBLE
                         binding.rvScenarios.visibility = View.GONE
+                        binding.svScenarios.visibility = View.GONE
                     }
                 }
             }
@@ -78,6 +95,19 @@ class EventActivity : AppCompatActivity() {
                 supportActionBar?.setDisplayShowTitleEnabled(false)
                 eventtext.text = eventTitle
             }
+        }
+    }
+    private fun showProgressBar() {
+        runOnUiThread {
+            binding.progressBarLayout.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideProgressBar() {
+        runOnUiThread {
+            binding.progressBarLayout.visibility = View.GONE
+            progressBar.visibility = View.GONE
         }
     }
 
@@ -92,6 +122,7 @@ class EventActivity : AppCompatActivity() {
     private fun showErrorMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

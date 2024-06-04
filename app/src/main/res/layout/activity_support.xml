@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Support">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/support_toolbar"
         android:layout_width="match_parent"
@@ -18,7 +19,8 @@
 
     <TextView
         android:id="@+id/support_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/rubik_regular"
@@ -31,42 +33,268 @@
         app:layout_constraintTop_toTopOf="@+id/support_toolbar"
         tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:layout_width="320dp"
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/text_subtitle"
+        android:fontFamily="@font/rubik_regular"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+
+        android:text="Выберите или опишите проблему, которая возникла при использования нашего приложения "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/support_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/support_toolbar" />
 
-        <TextView
-            android:id="@+id/textView16"
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Проблема"
+        android:textColor="@color/text"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/rubik_regular"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/support_popup"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:background="@drawable/rounded_corners"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:text="Выберите проблему"
+            android:textAllCaps="false"
+            android:textColor="@color/text_subtitle"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.8" />
+
+
+        <ImageButton
+            android:id="@+id/arrow_bottom_support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Выберите или опишите проблему, которая у возникла при использования нашего приложения " />
+            android:layout_marginEnd="32dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/arrow_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/support_popup"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="320dp"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/popup_layout"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:outlineSpotShadowColor="#80000000"
+        android:background="@drawable/background_popup"
+        android:layout_width="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_height="216dp"
+        android:layout_marginTop="32dp"
+        android:animateLayoutChanges="true"
+        android:layoutAnimation="@anim/slide_up_animation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/text"
+            android:text="Отчет не отправился"
+            android:background="@null"
+            android:button="@null"
+            android:drawableEnd="@drawable/konsyst_radio_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/text"
+            android:text="Фича не работает"
+            android:background="@null"
+            android:button="@null"
+            android:drawableEnd="@drawable/konsyst_radio_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/text"
+            android:text="Лагает все"
+            android:background="@null"
+            android:button="@null"
+            android:drawableEnd="@drawable/konsyst_radio_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:fontFamily="@font/rubik_regular"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textColor="@color/text"
+            android:text="Другое"
+            android:background="@null"
+            android:button="@null"
+            android:drawableEnd="@drawable/konsyst_radio_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/support_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/buttonround"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="Отправить жалобу"
+        android:textAllCaps="false"
+        android:textColor="@color/bg_color"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/progressBarLayout"
+        android:layout_width="360dp"
+        android:layout_height="320dp"
+        android:background="@drawable/background_popup"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:animateLayoutChanges="true"
+        android:layoutAnimation="@anim/slide_up_animation"
+        android:outlineSpotShadowColor="#80000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/next"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="vertical">
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/buttonround"
+            android:fontFamily="@font/raleway_semibold"
+            android:text="Продолжить"
+            android:textAllCaps="false"
+            android:textColor="@color/bg_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProgressBar"
+            app:layout_constraintWidth_percent="0.8" />
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Проблема" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/transparent"
+            android:indeterminateDrawable="@drawable/konsyst_progress"
+            app:layout_constraintBottom_toTopOf="@+id/tvProgressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/imageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/success_oval"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.18" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="47dp"
-                    android:hint="Выберите проблему" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="Жалоба отправлена!"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+        <TextView
+            android:id="@+id/tvProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center"
+            android:text="Отправляем жалобу..."
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHeader"
+            app:layout_constraintVertical_bias="0.272" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

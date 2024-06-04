@@ -5,11 +5,9 @@ data class Event(
     val id: Int,
     val title: String,
     val date: String,
-    val scenarios: List<Scenario>,
     val scenariosCount: Int,
     val scenariosComplete: Int? = null,
     val userId: Int? = null,
-    val userIds: List<Int>? = null,
     val status: EventStatus
 ) : Serializable
 
@@ -26,7 +24,8 @@ data class Scenario(
     val date: String,
     val location: String,
     val steps: List<Step>,
-    val isCompleted: Boolean = false
+    val isCompleted: Boolean = false,
+    val eventFrom: String? = null
 ) : Serializable
 
 data class Step(
@@ -34,7 +33,9 @@ data class Step(
     val title : String,
     val scenarioId: Int,
     val action: String,
-    val number: Int
+    val number: Int,
+    var photoPaths: MutableList<String> = mutableListOf(),
+    var videoPath: String? = null,
 ) : Serializable
 
 data class Action(
@@ -47,6 +48,16 @@ enum class ActionType {
     PHOTO,
     VIDEO
 }
+data class CreateDataRequest(
+    val userId: Int?,
+    val eventId: Int?,
+    val scenarioId: Int?,
+    val stepId: Int?,
+    val videoFile: ByteArray? = null,
+    val photoFiles: List<ByteArray>? = null,
+    val userComment: String? = null
+) : Serializable
+
 
 
 

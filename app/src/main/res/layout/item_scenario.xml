@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/item_scenario_rounded"
     android:layout_width="match_parent"
     android:backgroundTint="@color/bg_color"
@@ -9,50 +10,90 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:fontFamily="@font/rubik_medium"
-        android:layout_width="match_parent"
-        android:textColor="@color/text"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold" />
     <LinearLayout
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:id="@+id/tvDate"
-            android:fontFamily="@font/rubik_regular"
-            android:textSize="14sp"
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
             android:textColor="@color/text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawablePadding="1.6dp"
-            app:drawableStartCompat="@drawable/clock_small" />
-        <TextView
-            android:id="@+id/tvAttachments"
-            android:text="4"
-            android:textColor="@color/text"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/rubik_regular"
-            android:visibility="gone"
-            android:textSize="14sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="1.6dp"
-            app:drawableStartCompat="@drawable/paperclip" />
-        <ImageView
-            android:id="@+id/tvComment"
-            android:layout_marginStart="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:src="@drawable/comment"
-            android:layout_gravity="center" />
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="1.6dp"
+                android:fontFamily="@font/rubik_regular"
+                android:textColor="@color/text"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/clock_small" />
+
+            <TextView
+                android:id="@+id/tvAttachments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:drawablePadding="1.6dp"
+                android:fontFamily="@font/rubik_regular"
+                android:text="4"
+                android:textColor="@color/text"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/paperclip" />
+
+            <ImageView
+                android:id="@+id/tvComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/comment"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
     </LinearLayout>
+    <ImageView
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:id="@+id/btnComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rectangle"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-
-</LinearLayout>
+    <ImageView
+        android:id="@+id/btnStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:src="@drawable/succes_scenario"
+        app:layout_constraintBottom_toBottomOf="@+id/btnComplete"
+        app:layout_constraintEnd_toEndOf="@+id/btnComplete"
+        app:layout_constraintStart_toStartOf="@+id/btnComplete"
+        app:layout_constraintTop_toTopOf="@+id/btnComplete" />
+</androidx.constraintlayout.widget.ConstraintLayout>

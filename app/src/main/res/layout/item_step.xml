@@ -31,17 +31,18 @@
         android:orientation="vertical">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvNotificationPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-
             android:fontFamily="@font/rubik_regular"
             android:text="Добавьте до 3 фотографий"
             android:textColor="@color/text_subtitle"
             android:textSize="14sp" />
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -50,6 +51,7 @@
                 android:id="@+id/actionsphoto"
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
+                android:visibility="gone"
                 android:layout_marginTop="8dp">
 
                 <ImageView
@@ -76,31 +78,79 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/photoImageView1"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                />
-            <ImageView
-                android:id="@+id/photoImageView2"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                />
-            <ImageView
-                android:id="@+id/photoImageView3"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/photoImageView1"
+
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/close1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/delete_image_btn_white"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:layout_constraintEnd_toEndOf="@+id/photoImageView1"
+                    app:layout_constraintTop_toTopOf="@+id/photoImageView1" />
+
+                <ImageView
+                    android:id="@+id/photoImageView2"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:layout_marginLeft="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/photoImageView1" />
+
+                <ImageButton
+                    android:id="@+id/close2"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/delete_image_btn_white"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:layout_constraintEnd_toEndOf="@+id/photoImageView2"
+                    app:layout_constraintTop_toTopOf="@+id/photoImageView2" />
+
+                <ImageView
+                    android:id="@+id/photoImageView3"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:layout_marginLeft="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/photoImageView2" />
+
+                <ImageButton
+                    android:id="@+id/close3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/delete_image_btn_white"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    app:layout_constraintEnd_toEndOf="@+id/photoImageView3"
+                    app:layout_constraintTop_toTopOf="@+id/photoImageView3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvNotificationVideo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,6 +167,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/actionsvideo"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="76dp"
                 android:layout_marginTop="8dp">
@@ -143,13 +194,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/video_add_rounded" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <ImageView
-                android:id="@+id/videoView"
-                android:layout_width="76dp"
-                android:layout_height="76dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/photo_add" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/videoView"
+                    android:layout_width="76dp"
+                    android:layout_height="76dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@android:color/transparent"
+                    android:scaleX="1"
+                    android:scaleY="1"
+                    android:src="@drawable/delete_image_btn_white"
+                    app:layout_constraintEnd_toEndOf="@+id/videoView"
+                    app:layout_constraintTop_toTopOf="@+id/videoView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
     </LinearLayout>

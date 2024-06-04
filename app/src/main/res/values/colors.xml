@@ -4,9 +4,14 @@
     <!--──────▮─Light─Theme────────────-->
     <!--────────────────────────────────-->
     <!---    Text     -->
+    <!---    └ Test      -->
     <color name="text">#151515</color>
     <color name="text_secondary">#515151</color>
     <color name="text_subtitle">#A1A1A1</color>
+    <!---    └ Transparent      -->
+    <color name="text_transparent">#8A8A8A</color>
+    <color name="main_transparent">#8B96B9</color>
+
     <!---    Main     -->
     <color name="main_blue">#172E73</color>
     <color name="secondary">#DEE6FF</color>

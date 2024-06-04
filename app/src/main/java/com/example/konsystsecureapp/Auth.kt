@@ -30,13 +30,18 @@ class Auth : AppCompatActivity() {
         PreferenceManager.init(this)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        progressBar = binding.progressBar
+        showProgressBar()
         networkService.isTokenValid { isValid, message ->
+            showProgressBar()
             if (isValid) {
+                hideProgressBar()
                 showSuccessToast("Вы успешно авторизовались")
                 val intent = Intent(this@Auth, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
             } else {
+                hideProgressBar()
 
 
 
@@ -48,7 +53,7 @@ class Auth : AppCompatActivity() {
         }
 
 
-        progressBar = binding.progressBar
+
         binding.loginButton.setOnClickListener {
             val loginButton = binding.loginButton
             buttonToggle(loginButton)
@@ -86,7 +91,6 @@ class Auth : AppCompatActivity() {
             binding.progressBarLayout.visibility = View.VISIBLE
             progressBar.visibility = View.VISIBLE
         }
-
     }
 
     private fun hideProgressBar() {
@@ -103,6 +107,7 @@ class Auth : AppCompatActivity() {
         PreferenceManager.saveAuthToken(authResponse.token)
         PreferenceManager.saveProtectedAuthToken(authResponse.protectedToken)
         PreferenceManager.saveUsername(authResponse.username)
+        PreferenceManager.saveUserId(authResponse.userId)
         PreferenceManager.saveUserNickname(authResponse.userNickname)
     }
 

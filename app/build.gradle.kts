@@ -39,6 +39,10 @@ android {
 }
 
 dependencies {
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation ("com.github.wseemann:FFmpegMediaMetadataRetriever-core:1.0.19")
+    implementation ("com.github.wseemann:FFmpegMediaMetadataRetriever-native:1.0.19")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.yandex.android:maps.mobile:4.6.1-lite")
     implementation("androidx.activity:activity-ktx:1.6.1")

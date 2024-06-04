@@ -13,6 +13,8 @@ object PreferenceManager {
     private const val USERNAME_KEY = "username_key"
     private const val USERNICKNAME_KEY = "usernickname_key"
     private const val EVENTTITLE_KEY = "eventTitle_key"
+    private const val USERID = "userid"
+    private const val VIDEO_FILE = "video_prefs"
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -26,6 +28,15 @@ object PreferenceManager {
         return sharedPreferences
     }
 
+    fun saveUserId(userId: Int){
+        sharedPreferences.edit()
+            .putInt(USERID, userId)
+            .apply()
+    }
+    fun getUserId(): Int?{
+        val userId = sharedPreferences.getInt(USERID, -1)
+        return if (userId == -1) null else userId
+    }
     fun saveEventId(eventId: Int) {
         sharedPreferences.edit()
             .putInt(EVENT_ID_KEY, eventId)

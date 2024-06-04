@@ -1,6 +1,7 @@
 package com.example.konsystsecureapp.network
 
 import com.example.konsystsecureapp.Preferences.PreferenceManager
+import com.example.konsystsecureapp.data.CreateDataRequest
 import com.google.gson.Gson
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -56,7 +57,66 @@ class NetworkService {
         })
     }
 
+    fun sendDataSteps(createDataRequest: CreateDataRequest, callback: (Boolean, String?) -> Unit) {
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("userId", createDataRequest.userId?.toString() ?: "")
+            .addFormDataPart("eventId", createDataRequest.eventId?.toString() ?: "")
+            .addFormDataPart("scenarioId", createDataRequest.scenarioId?.toString() ?: "")
+            .addFormDataPart("stepId", createDataRequest.stepId?.toString() ?: "")
+            .addFormDataPart("userComment", createDataRequest.userComment ?: "")
+            .also { builder ->
+                createDataRequest.videoFile?.let {
+                    builder.addPart(MultipartBody.Part.createFormData("videoFile", "video.mp4", it.toRequestBody()))
+                }
+                createDataRequest.photoFiles?.forEachIndexed { index, photoByteArray ->
+                    builder.addPart(MultipartBody.Part.createFormData("photoFile$index", "photo$index.jpg", photoByteArray.toRequestBody()))
+                }
+            }
+            .build()
 
+        val request = Request.Builder()
+            .url("$URL/userdata/request")
+            .addHeader("Bearer-Authorization", "${PreferenceManager.getAuthToken()}")
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false, e.message)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                when (response.code) {
+                    200 -> callback(true, responseBody)
+                    else -> callback(false, "Error: ${response.code} $responseBody")
+                }
+            }
+        })
+    }
+    fun UpdateScenario(id: Int, isCompleted: Boolean?, callback: (Boolean, String?) -> Unit) {
+        val requestBody = mapOf(
+            "id" to id,
+            "isCompleted" to isCompleted
+        )
+        val json = Gson().toJson(requestBody).toRequestBody("application/json".toMediaType())
+        val request = Request.Builder().url("$URL/scenarios/update").post(json).addHeader("Bearer-Authorization", "${PreferenceManager.getAuthToken()}").build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false, e.message)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                when (response.code) {
+                    200 -> callback(true, responseBody)
+                    else -> callback(false, "Error: ${response.code} $responseBody")
+                }
+            }
+        })
+    }
     fun searchEvents(searchQuery: String, callback: (Boolean, String?) -> Unit) {
         val json = Gson().toJson(searchQuery).toRequestBody("application/json".toMediaType())
         val request = Request.Builder().url("$URL/events/search").post(json).addHeader("Bearer-Authorization", "$searchQuery").build()
@@ -81,6 +141,24 @@ class NetworkService {
         val json = Gson().toJson(searchQueryObj).toRequestBody("application/json".toMediaType())
         val token = PreferenceManager.getAuthToken()
         val request = Request.Builder().url("$URL/scenarios/search").post(json).addHeader("Bearer-Authorization", "$token").build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false, e.message)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                when (response.code) {
+                    200 -> callback(true, responseBody)
+                    else -> callback(false, "Error: ${response.code} $responseBody")
+                }
+            }
+        })
+    }
+    fun searchAllScenarios(searchQuery: String, callback: (Boolean, String?) -> Unit) {
+        val json = Gson().toJson(searchQuery).toRequestBody("application/json".toMediaType())
+        val request = Request.Builder().url("$URL/scenarios/search-all").post(json).addHeader("Bearer-Authorization", "$searchQuery").build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {

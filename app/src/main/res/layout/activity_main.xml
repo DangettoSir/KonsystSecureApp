@@ -25,23 +25,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/notificationCount"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:background="@drawable/badge_background"
-            android:fontFamily="@font/rubik_medium"
-            android:gravity="center"
-            android:text="2"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/main_toolbar"
-            app:layout_constraintEnd_toEndOf="@+id/main_toolbar"
-            app:layout_constraintHorizontal_bias="0.98"
-            app:layout_constraintStart_toStartOf="@+id/main_toolbar"
-            app:layout_constraintTop_toTopOf="@+id/main_toolbar"
-            app:layout_constraintVertical_bias="0.35" />
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -79,6 +62,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/avatar"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        android:textColor="@color/text"
                         android:textSize="17sp"
                         app:layout_constraintTop_toTopOf="@+id/avatar" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -136,6 +120,7 @@
                         android:layout_marginRight="8dp"
                         android:backgroundTint="@color/main_blue"
                         android:text="Все"
+                        android:visibility="gone"
                         android:textColor="@color/bg_color"
                         android:textSize="15sp" />
                     <Button
@@ -144,7 +129,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:backgroundTint="@color/secondary_lighter"
-                        android:text="Недавние"
+                        android:text="На проверке"
+                        android:visibility="gone"
                         android:textColor="@color/text"
                         android:textSize="15sp" />
                     <Button
@@ -153,20 +139,46 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/secondary_lighter"
                         android:text="Срок истекает"
+                        android:visibility="gone"
                         android:textColor="@color/text"
                         android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.0" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintHeight_percent="0.8" />
+        </ScrollView>
+
         <TextView
+            android:visibility="gone"
             android:id="@+id/eventtextempty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_regular"
-            android:visibility="gone"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="Мероприятий на текущий момент нет."
+            android:gravity="center"
             android:textColor="@color/text_subtitle"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -174,21 +186,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintVertical_bias="0.19999999" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvEvents"
-            android:layout_width="match_parent"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/progressBarLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.350">
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:indeterminateDrawable="@drawable/konsyst_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.40" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
