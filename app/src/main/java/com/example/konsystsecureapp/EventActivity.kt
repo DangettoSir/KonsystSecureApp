@@ -47,9 +47,32 @@ class EventActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.eventComplete.isEnabled = false
+        val searchQueryEvent = PreferenceManager.getEventId()
+        Log.d("searchQueryEvent", searchQueryEvent.toString())
+        if (searchQueryEvent != null) {
+            networkService.checkEventStatus(searchQueryEvent) { status, message ->
+                showProgressBar()
+                Log.d("STATUS!!!!", status.toString())
+                if(status){
+                    hideProgressBar()
+                    runOnUiThread {
+                        binding.eventComplete.isEnabled = true
+                    }
+
+                }
+                else{
+                    hideProgressBar()
+                    runOnUiThread {
+                        binding.eventComplete.isEnabled = false
+                    }
+                }
+            }
+        }
 
         binding.rvScenarios.layoutManager = LinearLayoutManager(this)
         val searchQuery = PreferenceManager.getEventId()
+
         if (searchQuery != null) {
             showProgressBar()
             networkService.searchScenarios(searchQuery) { success, message ->
@@ -94,6 +117,24 @@ class EventActivity : AppCompatActivity() {
                 supportActionBar?.setHomeAsUpIndicator(R.drawable.chevron_left)
                 supportActionBar?.setDisplayShowTitleEnabled(false)
                 eventtext.text = eventTitle
+                eventComplete.setOnClickListener{
+                    showProgressBar()
+                    val searchQueryEvent = PreferenceManager.getEventId()?.toInt()
+                    if (searchQueryEvent != null) {
+                        showProgressBar()
+                        networkService.updateEventStatus(searchQueryEvent) {success, message ->
+                            showProgressBar()
+                            if(success){
+                                hideProgressBar()
+                                finish()
+                            }
+                            else{
+                                hideProgressBar()
+                                showErrorMessage(message.toString())
+                            }
+                        }
+                    }
+                }
             }
         }
     }

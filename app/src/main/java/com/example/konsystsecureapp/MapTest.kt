@@ -49,7 +49,7 @@ class MapTest : AppCompatActivity() {
                 MapKitFactory.getInstance().onStart()
                 binding.mapview.onStart()
             } else {
-                // Разрешение не предоставлено
+
             }
         }
     }

@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.github.wseemann:FFmpegMediaMetadataRetriever-core:1.0.19")
     implementation ("com.github.wseemann:FFmpegMediaMetadataRetriever-native:1.0.19")

@@ -1,5 +1,6 @@
 package com.example.konsystsecureapp.network
 
+import android.util.Log
 import com.example.konsystsecureapp.Preferences.PreferenceManager
 import com.example.konsystsecureapp.data.CreateDataRequest
 import com.google.gson.Gson
@@ -95,9 +96,12 @@ class NetworkService {
             }
         })
     }
-    fun UpdateScenario(id: Int, isCompleted: Boolean?, callback: (Boolean, String?) -> Unit) {
+
+
+    fun UpdateScenario(id: Int, eventId: Int, isCompleted: Boolean?, callback: (Boolean, String?) -> Unit) {
         val requestBody = mapOf(
             "id" to id,
+            "eventId" to eventId,
             "isCompleted" to isCompleted
         )
         val json = Gson().toJson(requestBody).toRequestBody("application/json".toMediaType())
@@ -136,6 +140,46 @@ class NetworkService {
         })
     }
     data class SearchQuery(val searchQuery: Int)
+    fun checkEventStatus(searchQuery: Int, callback: (Boolean, String?) -> Unit){
+        Log.d("searchQuery checkEventStatusMethod", searchQuery.toString())
+        val searchQueryObj = SearchQuery(searchQuery)
+        Log.d("searchQueryObj checkEventStatusMethod", searchQueryObj.toString())
+        val json = Gson().toJson(searchQueryObj).toRequestBody("application/json".toMediaType())
+        val request = Request.Builder().url("$URL/events/status").post(json).addHeader("Bearer-Authorization", "${PreferenceManager.getAuthToken()}").build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false, e.message)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                when (response.code) {
+                    200 -> callback(true, responseBody)
+                    else -> callback(false, "Error: ${response.code} $responseBody")
+                }
+            }
+        })
+    }
+    fun updateEventStatus(searchQuery: Int, callback: (Boolean, String?) -> Unit){
+        val searchQueryObj = SearchQuery(searchQuery)
+        val json = Gson().toJson(searchQueryObj).toRequestBody("application/json".toMediaType())
+        val request = Request.Builder().url("$URL/events/statusUpdate").post(json).addHeader("Bearer-Authorization", "${PreferenceManager.getAuthToken()}").build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback(false, e.message)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                when (response.code) {
+                    200 -> callback(true, responseBody)
+                    else -> callback(false, "Error: ${response.code} $responseBody")
+                }
+            }
+        })
+    }
     fun searchScenarios(searchQuery: Int, callback: (Boolean, String?) -> Unit) {
         val searchQueryObj = SearchQuery(searchQuery)
         val json = Gson().toJson(searchQueryObj).toRequestBody("application/json".toMediaType())
@@ -195,5 +239,7 @@ class NetworkService {
             }
         })
     }
+
+
 
 }

@@ -341,7 +341,8 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
     fun saveData() {
         val id = PreferenceManager.getScenarioId()!!.toInt()
         val isCompleted = true
-        networkService.UpdateScenario(id, isCompleted){ success, message ->
+        val eventId = PreferenceManager.getEventId()!!.toInt()
+        networkService.UpdateScenario(id, eventId, isCompleted){ success, message ->
             if(success){
             } else{
                 runOnUiThread {
@@ -368,7 +369,7 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
                 val intent = Intent()
                 intent.putExtra("eventTitle", PreferenceManager.getEventTitle())
                 setResult(Activity.RESULT_OK, intent)
-                finish() // Возвращаемся в предыдущую активность
+                finish()
             } else {
                 hideProgressBar2()
                 runOnUiThread {

@@ -56,9 +56,53 @@ class MainActivity : AppCompatActivity() {
                 moveTaskToBack(true)
             }
         }
+        val swipeRefreshLayout  = binding.swipeRefreshLayout
+        val rvEvents = binding.rvEvents
         onBackPressedDispatcher.addCallback(onBackPressedCallback)
         binding.rvEvents.layoutManager = LinearLayoutManager(this)
         val searchQuery = PreferenceManager.getAuthToken()
+        swipeRefreshLayout.setOnRefreshListener {
+            if (searchQuery != null) {
+            showProgressBar()
+            networkService.searchEvents(searchQuery) { success, message ->
+                showProgressBar()
+                if (success) {
+                    hideProgressBar()
+                    val events = message?.let { message ->
+                        parseEventsFromJson(message)
+                    } ?: emptyList()
+                    val filteredEvents = filterEventsByStatus(events)
+                    runOnUiThread {
+                        val noEventsText = binding.eventtextempty
+                        eventList.clear()
+                        eventList.addAll(filteredEvents)
+                        eventAdapter = EventAdapter(eventList, this@MainActivity) { eventId ->
+                            PreferenceManager.saveEventId(eventId)
+                        }
+                        binding.rvEvents.adapter = eventAdapter
+                        if (eventList.isEmpty()) {
+                            noEventsText.visibility = View.VISIBLE
+                            binding.rvEvents.visibility = View.GONE
+                        } else {
+                            noEventsText.visibility = View.GONE
+                            binding.rvEvents.visibility = View.VISIBLE
+                        }
+                        updateFilterButtonVisibility(events)
+                    }
+                } else {
+                    hideProgressBar()
+                    val noEventsText = binding.eventtextempty
+                    runOnUiThread {
+                        noEventsText.visibility = View.VISIBLE
+                        binding.rvEvents.visibility = View.GONE
+                    }
+                }
+            }
+            }
+
+            // Остановить индикатор обновления
+            swipeRefreshLayout.isRefreshing = false
+        }
         if (searchQuery != null) {
             showProgressBar()
             networkService.searchEvents(searchQuery) { success, message ->
@@ -188,7 +232,6 @@ class MainActivity : AppCompatActivity() {
         val filteredEvents = filterEventsByStatus(eventList)
         eventAdapter.updateData(filteredEvents)
 
-        // Установка анимации для ListView
         binding.rvEvents.layoutAnimation = AnimationUtils.loadLayoutAnimation(
             this, R.anim.events_rv_layout_animation
         )

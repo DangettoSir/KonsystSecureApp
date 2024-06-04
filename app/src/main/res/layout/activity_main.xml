@@ -9,6 +9,10 @@
     tools:context=".MainActivity"
     tools:menu="@menu/nav_menu">
     <!--tools:openDrawer="start"-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_content"
         android:layout_width="match_parent"
@@ -169,6 +173,8 @@
                 app:layout_constraintHeight_percent="0.8" />
         </ScrollView>
 
+
+
         <TextView
             android:visibility="gone"
             android:id="@+id/eventtextempty"
@@ -213,7 +219,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_burger"
         android:layout_width="260dp"
