@@ -1,365 +1,379 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="8dp">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/scenariodetail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/scenariodetail_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/rubik_regular"
-        android:text="Сценарий"
-        android:textColor="@color/text"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/scenariodetail_toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/scenariodetail_toolbar"
-        app:layout_constraintStart_toStartOf="@+id/scenariodetail_toolbar"
-        app:layout_constraintTop_toTopOf="@+id/scenariodetail_toolbar"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:fontFamily="@font/rubik_regular"
-        android:textColor="@color/text_secondary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scenariodetail_toolbar" />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:fontFamily="@font/rubik_semibold"
-        android:textColor="@color/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
-
-    <TextView
-        android:id="@+id/tvDescription"
-        android:fontFamily="@font/raleway_regular"
-        android:textColor="@color/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
-    <TextView
-        android:id="@+id/tvLocationText"
-        android:fontFamily="@font/rubik_regular"
-        android:textColor="@color/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="16sp"
-        android:text="Адрес"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
-    <TextView
-        android:id="@+id/tvLocation"
-        android:fontFamily="@font/rubik_regular"
-        android:textColor="@color/main_blue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocationText" />
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="320dp"
-        android:layout_height="190dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocation">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp">
 
-        <ImageView
-            android:id="@+id/tvMap"
-            android:layout_width="320dp"
-            android:layout_height="190dp"
-            android:src="@drawable/photo_add"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/scenariodetail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.yandex.mapkit.mapview.MapView
-            android:id="@+id/mapview"
+        <TextView
+            android:id="@+id/scenariodetail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Сценарий"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/scenariodetail_toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/scenariodetail_toolbar"
+            app:layout_constraintStart_toStartOf="@+id/scenariodetail_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/scenariodetail_toolbar"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tvDate"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scenariodetail_toolbar" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/rubik_semibold"
+            android:textColor="@color/text"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@color/text"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvLocationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Адрес"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textColor="@color/main_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocationText" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="320dp"
+            android:layout_height="190dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocation">
+
+            <ImageView
+                android:id="@+id/tvMap"
+                android:layout_width="320dp"
+                android:layout_height="190dp"
+                android:src="@drawable/photo_add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.yandex.mapkit.mapview.MapView
+                android:id="@+id/mapview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.yandex.mapkit.mapview.MapView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/steptextempty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Шагов для данного сценария в текущий момент нет."
+            android:textAlignment="center"
+            android:textColor="@color/text_subtitle"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSteps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <TextView
+            android:id="@+id/tvCommentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Комментарий"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvSteps" />
+
+        <TextView
+            android:id="@+id/tvCommentNotion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/rubik_regular"
+            android:text="Оставьте комментарий (необязательно)"
+            android:textColor="@color/text_subtitle"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCommentTitle" />
+
+
+        <EditText
+            android:id="@+id/commentEditText"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+
+            android:background="@drawable/rounded_corners"
+            android:fontFamily="@font/raleway_regular"
+            android:hint="Комментарий"
+            android:inputType="text"
+            android:paddingStart="9dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/text"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCommentNotion"
+            app:layout_constraintVertical_bias="0.13999999" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progressBarLayout"
+            android:layout_width="330dp"
+            android:layout_height="200dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/background_popup"
+            android:elevation="10dp"
+            android:layoutAnimation="@anim/slide_up_animation"
+            android:outlineProvider="bounds"
+            android:outlineSpotShadowColor="#80000000"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </com.yandex.mapkit.mapview.MapView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_medium"
+                android:text="Вы уверены что хотите выйти?"
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
 
-    <TextView
-        android:id="@+id/steptextempty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:visibility="gone"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/rubik_regular"
-        android:text="Шагов для данного сценария в текущий момент нет."
-        android:textAlignment="center"
-        android:textColor="@color/text_subtitle"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvDescriptionPG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_regular"
+                android:text="Внесенные вами изменения не сохранятся!"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSteps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/buttonround"
+                android:backgroundTint="@color/main_blue"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Да"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8" />
 
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-    <TextView
-        android:id="@+id/tvCommentTitle"
-        android:fontFamily="@font/rubik_regular"
-        android:textColor="@color/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="16dp"
-        android:text="Комментарий"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvSteps" />
-    <TextView
-        android:id="@+id/tvCommentNotion"
-        android:fontFamily="@font/rubik_regular"
-        android:textColor="@color/text_subtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:text="Оставьте комментарий (необязательно)"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCommentTitle" />
-    <EditText
-        android:paddingStart="9dp"
-        android:paddingBottom="4dp"
-        android:id="@+id/commentEditText"
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/text"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/raleway_regular"
-        android:background="@drawable/rounded_corners"
-        android:hint="Комментарий"
-        android:textSize="15sp"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCommentNotion"
- />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/buttonround_cancel"
+                android:backgroundTint="@color/dangerous_m"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Нет"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/scenarioComplete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/buttonround"
-        android:backgroundTint="@color/main_blue"
-        android:fontFamily="@font/raleway_semibold"
-        android:text="Выполнить сценарий"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentEditText" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="gone"
-        android:id="@+id/progressBarLayout"
-        android:elevation="10dp"
-        android:outlineProvider="bounds"
-        android:outlineSpotShadowColor="#80000000"
-        android:layout_width="330dp"
-        android:layout_height="200dp"
-        android:background="@drawable/background_popup"
-        android:animateLayoutChanges="true"
-        android:layoutAnimation="@anim/slide_up_animation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_medium"
-            android:text="Вы уверены что хотите выйти?"
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            android:visibility="visible"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progressBarSendLayout"
+            android:layout_width="330dp"
+            android:layout_height="200dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/background_popup"
+            android:elevation="10dp"
+            android:layoutAnimation="@anim/slide_up_animation"
+            android:outlineProvider="bounds"
+            android:outlineSpotShadowColor="#80000000"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
-        <TextView
-            android:id="@+id/tvDescriptionPG"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/rubik_regular"
-            android:text="Внесенные вами изменения не сохранятся!"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            tools:ignore="DuplicateIds">
+
+            <ProgressBar
+                android:id="@+id/progressBarSend"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:indeterminateDrawable="@drawable/konsyst_progress"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.40" />
+
+            <TextView
+                android:id="@+id/tvProgressBarSend2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/rubik_regular"
+                android:text="Отправляем отчёт..."
+                android:textColor="@color/text"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBarSend"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="DuplicateIds" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/yes"
-            android:layout_width="wrap_content"
+            android:id="@+id/scenarioComplete"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/buttonround"
             android:backgroundTint="@color/main_blue"
             android:fontFamily="@font/raleway_semibold"
-            android:text="Да"
+            android:text="Выполнить сценарий"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/buttonround_cancel"
-            android:backgroundTint="@color/dangerous_m"
-            android:fontFamily="@font/raleway_semibold"
-            android:text="Нет"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8" />
+            app:layout_constraintWidth_percent="0.92"
+            app:layout_constraintTop_toBottomOf="@+id/commentEditText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="gone"
-        android:id="@+id/progressBarSendLayout"
-        android:elevation="10dp"
-        android:outlineProvider="bounds"
-        android:outlineSpotShadowColor="#80000000"
-        android:layout_width="330dp"
-        android:layout_height="200dp"
-        android:background="@drawable/background_popup"
-        android:animateLayoutChanges="true"
-        android:layoutAnimation="@anim/slide_up_animation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DuplicateIds">
-
-        <ProgressBar
-            android:visibility="gone"
-            android:id="@+id/progressBarSend"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:indeterminateDrawable="@drawable/konsyst_progress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.40" />
-
-        <TextView
-            android:id="@+id/tvProgressBarSend2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/rubik_regular"
-            android:text="Отправляем отчёт..."
-            android:textColor="@color/text"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBarSend"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="DuplicateIds" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+
+

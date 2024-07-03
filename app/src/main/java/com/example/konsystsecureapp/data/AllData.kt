@@ -1,4 +1,5 @@
 package com.example.konsystsecureapp.data
+import java.io.File
 import java.io.Serializable
 
 data class Event(
@@ -53,8 +54,8 @@ data class CreateDataRequest(
     val eventId: Int?,
     val scenarioId: Int?,
     val stepId: Int?,
-    val videoFile: ByteArray? = null,
-    val photoFiles: List<ByteArray>? = null,
+    val videoFile: File? = null,
+    val photoFiles: List<File>? = null,
     val userComment: String? = null
 ) : Serializable
 

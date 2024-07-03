@@ -126,6 +126,9 @@ class EventActivity : AppCompatActivity() {
                             showProgressBar()
                             if(success){
                                 hideProgressBar()
+                                val intent = Intent(this@EventActivity, MainActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
                                 finish()
                             }
                             else{

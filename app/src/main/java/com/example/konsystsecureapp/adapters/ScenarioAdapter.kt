@@ -94,7 +94,7 @@ class ScenarioAdapter(
                             binding.btnStatus.visibility = View.VISIBLE
                         }
                         false -> {
-                            binding.btnStatus.visibility = View.GONE
+                            binding.btnStatus.visibility = View.GONE    
                         }
                     }
                     binding.tvTitle.text = scenario.title

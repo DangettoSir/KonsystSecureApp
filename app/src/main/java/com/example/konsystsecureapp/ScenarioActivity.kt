@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
@@ -149,12 +150,15 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
     private fun openCamera() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA)
+
     }
-    private fun onActionPhotoClick(position: Int) {
+    private fun onActionPhotoClick(position: Int, tag: Int) {
         openCamera()
+        PreferenceManager.saveStepId(tag?: -1)
     }
-    private fun onActionVideoClick(position: Int) {
+    private fun onActionVideoClick(position: Int, tag: Int) {
         openVideoRecorder()
+        PreferenceManager.saveStepId(tag?: -1)
     }
     override fun onDestroy() {
         super.onDestroy()
@@ -213,7 +217,9 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
                 currentStep.photoPaths = mutableListOf()
             }
             if (currentStep.photoPaths.size < NUMBER_OF_PHOTOS) {
-                val photoFile = saveImageToFile(imageBitmap, currentStep.photoPaths.size)
+                val id = PreferenceManager.getStepId()
+                val photoIndex = currentStep.photoPaths.size
+                val photoFile = saveImageToFile(imageBitmap, id?:-1, photoIndex)
                 currentStep.photoPaths.add(photoFile.absolutePath)
                 stepAdapter.notifyItemChanged(stepAdapter.clickedPosition)
             }
@@ -224,7 +230,8 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
                 Log.d("VideoRecording", "Attempting to save video to cache directory")
                 val currentStep = stepAdapter.steps[stepAdapter.clickedPosition]
                 if (currentStep.videoPath == null) {
-                    val videoFile = saveVideoToFile(uri)
+                    val id = PreferenceManager.getStepId()
+                    val videoFile = saveVideoToFile(uri, id?: -1)
                     currentStep.videoPath = videoFile.absolutePath
                     stepAdapter.notifyItemChanged(stepAdapter.clickedPosition)
                 } else {
@@ -241,70 +248,111 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
 
 
 
-    private fun saveImageToFile(bitmap: Bitmap, index: Int): File {
-        val file = File(externalCacheDir, "image_${System.currentTimeMillis()}_$index.jpg")
-        val outputStream = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        outputStream.flush()
-        outputStream.close()
-        return file
+    private fun saveImageToFile(bitmap: Bitmap, stepId: Int, index: Int): File {
+        val fileName = "image_${System.currentTimeMillis()}_step$stepId+$index.jpg"
+        val file = File(externalCacheDir, fileName)
+
+        // Добавляем логирование
+        Log.d("SaveImageToFile", "Сохранение изображения в: ${file.absolutePath}")
+
+        try {
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+            // Добавляем логирование
+            Log.d("SaveImageToFile", "Изображение успешно сохранено")
+
+            // Сохраняем путь к изображению в Shared Preferences
+            PreferenceManager.saveImagePath(stepId, index, file.absolutePath)
+
+            return file
+        } catch (e: IOException) {
+            // Добавляем логирование
+            Log.e("SaveImageToFile", "Ошибка сохранения файла изображения: $e")
+            throw e
+        }
     }
-    private fun getPhotoByteArrays(): List<ByteArray> {
-        val photoByteArrays = mutableListOf<ByteArray>()
-        val imagesDir = File(externalCacheDir, "images")
-        if (imagesDir.exists()) {
-            for (file in imagesDir.listFiles() ?: emptyArray()) {
-                if (file.name.startsWith("image_")) {
-                    val bytes = file.readBytes()
-                    photoByteArrays.add(bytes)
+
+    fun getPhotoFiles(stepId: Int): List<File> {
+        Log.i("getPhotoFiles", "Fetching photo files for stepId: $stepId")
+        val photoFiles = mutableListOf<File>()
+
+        val imagePaths = PreferenceManager.getImagePaths(stepId)
+        Log.i("getPhotoFiles", "Found ${imagePaths.size} image paths")
+
+        for (imagePath in imagePaths) {
+            if (imagePath != null) {
+                val file = File(imagePath)
+                if (file.exists()) {
+                    photoFiles.add(file)
+                    Log.i("getPhotoFiles", "Added file: $imagePath")
+                } else {
+                    val index = imagePaths.indexOf(imagePath)
+                    PreferenceManager.removeImagePath(stepId, index)
+                    Log.i("getPhotoFiles", "Removed non-existent file: $imagePath")
                 }
             }
         }
-        return photoByteArrays
+
+        Log.i("getPhotoFiles", "Returning ${photoFiles.size} photo files")
+        return photoFiles
     }
 
 
-    private fun saveVideoToFile(videoUri: Uri): File {
+
+    private fun saveVideoToFile(videoUri: Uri, stepId: Int): File {
         val context = applicationContext
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val fileName = "video_$timeStamp.mp4"
+        val fileName = "video_${timeStamp}_step$stepId.mp4"
         val storageDir = context.externalCacheDir
         val videoFile = File(storageDir, fileName)
+
+        // Add logging
+        Log.d("SaveVideoToFile", "Saving video to: ${videoFile.absolutePath}")
 
         try {
             val inputStream = contentResolver.openInputStream(videoUri)
             val outputStream = FileOutputStream(videoFile)
+
+            // Add logging
+            Log.d("SaveVideoToFile", "Copying video data to file")
+
             inputStream?.use { input ->
                 outputStream.use { output ->
                     input.copyTo(output)
                 }
             }
+
+            // Add logging
+            Log.d("SaveVideoToFile", "Video saved successfully")
+
+            // Сохраняем путь к видео в Shared Preferences
+            PreferenceManager.saveVideoPath(stepId, videoFile.absolutePath)
+
             return videoFile
         } catch (e: IOException) {
+            // Add logging
             Log.e("SaveVideoToFile", "Error saving video file: $e")
             throw e
         }
     }
 
-    private fun getVideoByteArray(): ByteArray? {
-        val context = applicationContext
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val fileName = "video_$timeStamp.mp4"
-        val storageDir = context.externalCacheDir
-        val videoFile = File(storageDir, fileName)
 
-        return if (videoFile.exists()) {
-            try {
-                videoFile.readBytes()
-            } catch (e: IOException) {
-                Log.e("GetVideoByteArray", "Error getting video byte array: $e")
-                null
+    fun getVideoFile(stepId: Int): File? {
+        val videoPath = PreferenceManager.getVideoPath(stepId)
+        if (videoPath != null) {
+            val videoFile = File(videoPath)
+            if (videoFile.exists()) {
+                return videoFile
+            } else {
+                PreferenceManager.removeVideoPath(stepId)
             }
-        } else {
-            Log.d("GetVideoByteArray", "Video file not found")
-            null
         }
+        return null
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -339,41 +387,56 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
     }
 
     fun saveData() {
-        val id = PreferenceManager.getScenarioId()!!.toInt()
-        val isCompleted = true
-        val eventId = PreferenceManager.getEventId()!!.toInt()
-        networkService.UpdateScenario(id, eventId, isCompleted){ success, message ->
-            if(success){
-            } else{
-                runOnUiThread {
-                    Toast.makeText(this, "АШИБКА ПРИ АПТЕЙДЕ Error: $message", Toast.LENGTH_SHORT).show()
+        val stepIds = PreferenceManager.getStepIds()
+        showProgressBar2()
+        Log.i("StepIds", stepIds.toString())
+        for (stepId in stepIds) {
+
+            val comment = binding.commentEditText.text.toString()
+            val photoFiles = getPhotoFiles(stepId)
+            val videoFile = getVideoFile(stepId)
+            Log.i("CreateDataRequest", "photoFiles: ${photoFiles?.size ?: 0}")
+            val createDataRequest = CreateDataRequest(
+                userId = PreferenceManager.getUserId(),
+                eventId = PreferenceManager.getEventId()?.toInt(),
+                scenarioId = PreferenceManager.getScenarioId()?.toInt(),
+                stepId = stepId,
+                videoFile = videoFile,
+                photoFiles = photoFiles,
+                userComment = comment.ifEmpty { "Null" }
+            )
+
+            networkService.sendDataSteps(createDataRequest) { success, message ->
+                if (success) {
+                    if (stepIds.lastIndex == stepIds.indexOf(stepId)) {
+                        hideProgressBar2()
+                        val intent = Intent(this, EventActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        val eventTitle = PreferenceManager.getEventTitle()
+                        val bundle = Bundle().apply {
+                            putString("eventTitle", eventTitle)
+                        }
+                        intent.putExtras(bundle)
+                        startActivity(intent)
+                        PreferenceManager.clearStepIds()
+                        finish()
+                    }
+                } else {
+                    hideProgressBar2()
+                    runOnUiThread {
+                        Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
-        val comment = binding.commentEditText.text.toString()
-        val photoByteArrays = getPhotoByteArrays()
-        val videoByteArray = getVideoByteArray()
-        val createDataRequest = CreateDataRequest(
-            userId = PreferenceManager.getUserId(),
-            eventId = PreferenceManager.getEventId(),
-            scenarioId = PreferenceManager.getScenarioId(),
-            stepId = PreferenceManager.getStepId(),
-            videoFile = videoByteArray ?: ByteArray(0),
-            photoFiles = photoByteArrays,
-            userComment = comment ?: "Null"
-        )
-        networkService.sendDataSteps(createDataRequest){ success, message ->
-            showProgressBar2()
-            if (success) {
-                hideProgressBar2()
-                val intent = Intent()
-                intent.putExtra("eventTitle", PreferenceManager.getEventTitle())
-                setResult(Activity.RESULT_OK, intent)
-                finish()
-            } else {
-                hideProgressBar2()
+        val userId = PreferenceManager.getUserId()
+        val eventId = PreferenceManager.getEventId()
+        val scenarioId = PreferenceManager.getScenarioId()
+        val isCompleted = true
+        networkService.UpdateScenario(scenarioId?:0, eventId?:0, isCompleted) { success, message ->
+            if (!success) {
                 runOnUiThread {
-                    Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "АШИБКА ПРИ АПТЕЙДЕ Error: $message", Toast.LENGTH_SHORT).show()
                 }
             }
         }

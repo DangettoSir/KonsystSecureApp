@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.konsystsecureapp.Preferences.PreferenceManager
 import com.example.konsystsecureapp.data.Step
 import com.example.konsystsecureapp.databinding.ItemStepBinding
 import java.io.File
@@ -28,8 +29,8 @@ class StepAdapter(
     internal val steps: List<Step>,
     private val context: Context,
     private val onStepClickListener: (Int) -> Unit,
-    private val onActionPhotoClickListener: (Int) -> Unit,
-    private val onActionVideoClickListener: (Int) -> Unit
+    private val onActionPhotoClickListener: (Int, Int) -> Unit,
+    private val onActionVideoClickListener: (Int, Int) -> Unit
 ) : RecyclerView.Adapter<StepAdapter.StepViewHolder>() {
     var clickedPosition: Int = -1
 
@@ -39,16 +40,34 @@ class StepAdapter(
     }
 
     override fun onBindViewHolder(holder: StepViewHolder, position: Int) {
+        PreferenceManager.clearStepIds()
         val step = steps[position]
+        steps
         holder.bind(step, holder)
+        holder.binding.layoutStep.tag = step.id
+        holder.binding.actionsvideo.tag = step.id
+        holder.binding.actionsphoto.tag = step.id
+        val stepId = step.id ?: throw IllegalStateException("stepId is not set")
+        val stepIds = PreferenceManager.getStepIds().toMutableList()
+        stepIds.add(step.id)
+        PreferenceManager.saveStepIds(stepIds)
 
+        Log.i("StepId",stepId.toString())
         holder.binding.actionsvideo.setOnClickListener {
             clickedPosition = position
-            onActionVideoClickListener.invoke(position)
+            val tag = holder.binding.actionsvideo.tag as? Int
+            Log.i("STEP ID TAG ACTIIONS VIDEO", tag.toString())
+            PreferenceManager.saveStepId(tag?:-1)
+            if (tag != null) {
+                onActionVideoClickListener.invoke(position, tag ?: -1)
+            }
         }
         holder.binding.actionsphoto.setOnClickListener {
             clickedPosition = position
-            onActionPhotoClickListener.invoke(position)
+            val tag = holder.binding.actionsphoto.tag as? Int
+            Log.i("STEP ID TAG ACTIIONS PHOTO", tag.toString())
+            PreferenceManager.saveStepId(tag?:-1)
+            onActionPhotoClickListener.invoke(position, tag?:-1)
         }
         step.videoPath?.let { path ->
             val videoView = holder.binding.videoView
@@ -71,7 +90,17 @@ class StepAdapter(
                     videoView.setImageBitmap(roundedBitmap)
                     holder.binding.actionsvideo.isEnabled = false
                     holder.binding.videoAddRounded.isEnabled = false
+
+                    // Получаем текущий stepId из PreferenceManager
+                    val stepId = PreferenceManager.getStepId() ?: throw IllegalStateException("stepId is not set")
+                    Log.i("STEP ID WHEN SET IMAGE BITMAP ", stepId.toString())
+
+                    // Сохраняем путь к изображению в PreferenceManager
+                    val index = PreferenceManager.getImagePaths(stepId).size
+                    PreferenceManager.saveImagePath(stepId, index, file.absolutePath)
+
                     closeView.setOnClickListener {
+                        PreferenceManager.removeImagePath(stepId, index)
                         removeVideoFromStep(holder, position)
                         Log.d("closeView", "Нажал!")
                     }
@@ -202,6 +231,8 @@ class StepAdapter(
                 binding.actions.visibility = View.VISIBLE
                 binding.tvNotificationVideo.visibility = View.VISIBLE
                 binding.actionsvideo.visibility = View.VISIBLE
+                binding.tvNotificationPhoto.visibility = View.GONE
+                binding.actionsphoto.visibility = View.GONE
             }
             if (step.action == "photo") {
                 val photoImageViews = arrayOfNulls<ImageView>(3)
@@ -211,13 +242,19 @@ class StepAdapter(
                 binding.actions.visibility = View.VISIBLE
                 binding.tvNotificationPhoto.visibility = View.VISIBLE
                 binding.actionsphoto.visibility = View.VISIBLE
+                binding.tvNotificationVideo.visibility = View.GONE
+                binding.actionsvideo.visibility = View.GONE
             }
             if (step.action == "photo,video") {
+                val photoImageViews = arrayOfNulls<ImageView>(3)
+                photoImageViews[0] = binding.photoImageView1
+                photoImageViews[1] = binding.photoImageView2
+                photoImageViews[2] = binding.photoImageView3
                 binding.actions.visibility = View.VISIBLE
-                binding.tvNotificationPhoto.visibility = View.VISIBLE
-                binding.actionsphoto.visibility = View.VISIBLE
                 binding.tvNotificationVideo.visibility = View.VISIBLE
                 binding.actionsvideo.visibility = View.VISIBLE
+                binding.tvNotificationPhoto.visibility = View.VISIBLE
+                binding.actionsphoto.visibility = View.VISIBLE
             }
             binding.tvNumber.text = "Шаг №" + step.number.toString()
             binding.tvDescription.text = step.title
