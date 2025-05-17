@@ -24,7 +24,7 @@ class UserNotice : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
+            /* networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     finish()
                 } else {
@@ -33,7 +33,7 @@ class UserNotice : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-            }
+            } */
         }
         return true
     }

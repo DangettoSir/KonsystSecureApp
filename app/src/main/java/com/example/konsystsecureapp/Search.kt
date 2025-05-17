@@ -33,7 +33,7 @@ class Search : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         PreferenceManager.init(this)
-        networkService.isTokenValid { isValid, message ->
+        /* networkService.isTokenValid { isValid, message ->
             if (isValid) {
             } else {
                 val intent = Intent(this@Search, Auth::class.java)
@@ -41,7 +41,7 @@ class Search : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }
+        } */
 
         binding.rvEvents.layoutManager = LinearLayoutManager(this)
         val searchQuery = PreferenceManager.getAuthToken()
@@ -193,7 +193,7 @@ class Search : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
+            /* networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     finish()
                 } else {
@@ -202,7 +202,8 @@ class Search : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-            }
+            }*/
+            finish()
         }
         return true
     }

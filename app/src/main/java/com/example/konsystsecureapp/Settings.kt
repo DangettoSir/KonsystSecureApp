@@ -18,7 +18,7 @@ class Settings : AppCompatActivity() {
         val bundle = intent.extras
         setContentView(binding.root)
         PreferenceManager.init(this)
-        networkService.isTokenValid { isValid, message ->
+        /* networkService.isTokenValid { isValid, message ->
             if (isValid) {
             } else {
                 val intent = Intent(this@Settings, Auth::class.java)
@@ -26,7 +26,7 @@ class Settings : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }
+        } */
         binding.apply{
             setSupportActionBar(settingsToolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -61,7 +61,7 @@ class Settings : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
+            /* networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     finish()
                 } else {
@@ -70,7 +70,7 @@ class Settings : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-            }
+            } */
         }
         return true
     }

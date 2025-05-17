@@ -35,7 +35,7 @@ class EventActivity : AppCompatActivity() {
         PreferenceManager.init(this)
         progressBar = binding.progressBar
         showProgressBar()
-        networkService.isTokenValid { isValid, message ->
+        /*-- networkService.isTokenValid { isValid, message ->
             showProgressBar()
             if (isValid) {
                 hideProgressBar()
@@ -46,7 +46,7 @@ class EventActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }
+        } --*/
         binding.eventComplete.isEnabled = false
         val searchQueryEvent = PreferenceManager.getEventId()
         Log.d("searchQueryEvent", searchQueryEvent.toString())
@@ -170,16 +170,7 @@ class EventActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
-                if (isValid) {
-                    finish()
-                } else {
-                    val intent = Intent(this@EventActivity, Auth::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                    finish()
-                }
-            }
+            finish()
         }
         return true
     }

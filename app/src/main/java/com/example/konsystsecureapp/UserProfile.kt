@@ -17,14 +17,15 @@ class UserProfile : AppCompatActivity() {
         binding = ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         PreferenceManager.init(this)
-        networkService.isTokenValid { isValid, message ->
+        /* networkService.isTokenValid { isValid, message ->
             if (isValid) {
             } else {
                 val intent = Intent(this@UserProfile, Auth::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
-            }}
+            }
+        } */
         binding.apply{
             setSupportActionBar(userprofileToolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -56,7 +57,7 @@ class UserProfile : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
+            /*networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     finish()
                 } else {
@@ -65,7 +66,8 @@ class UserProfile : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-            }
+            }*/
+            finish()
         }
         return true
     }

@@ -17,14 +17,14 @@ class About : AppCompatActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         PreferenceManager.init(this)
-        networkService.isTokenValid { isValid, message ->
+        /*-- networkService.isTokenValid { isValid, message ->
             if (isValid) {
             } else {
                 val intent = Intent(this@About, Auth::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
-            }}
+            }} --*/
         binding.apply{
             setSupportActionBar(aboutToolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -34,6 +34,7 @@ class About : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
+            /*--
             networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     finish()
@@ -43,8 +44,9 @@ class About : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+                --*/
+            finish()
             }
-        }
         return true
+        }
     }
-}

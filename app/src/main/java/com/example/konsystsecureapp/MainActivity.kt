@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         progressBar = binding.progressBar
         PreferenceManager.init(this)
-        networkService.isTokenValid { isValid, message ->
+        /*--networkService.isTokenValid { isValid, message ->
             showProgressBar()
             if (isValid) {
                 hideProgressBar()
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }
+        } */
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 moveTaskToBack(true)

@@ -62,7 +62,7 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
         PreferenceManager.init(this)
         progressBar = binding.progressBarSend
 
-        networkService.isTokenValid { isValid, message ->
+        /* networkService.isTokenValid { isValid, message ->
             if (isValid) {
             } else {
                 val intent = Intent(this@ScenarioActivity, Auth::class.java)
@@ -70,7 +70,7 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
                 startActivity(intent)
                 finish()
             }
-        }
+        } */
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 showProgressBar()
@@ -476,7 +476,7 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
+           /* networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     showProgressBar()
                 } else {
@@ -485,7 +485,9 @@ class ScenarioActivity : AppCompatActivity(), (Int) -> Unit {
                     startActivity(intent)
                     finish()
                 }
-            }
+            } */
+
+            finish()
         }
         return true
     }

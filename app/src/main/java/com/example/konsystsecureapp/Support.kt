@@ -131,7 +131,7 @@ class Support : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            networkService.isTokenValid { isValid, message ->
+            /* networkService.isTokenValid { isValid, message ->
                 if (isValid) {
                     finish()
                 } else {
@@ -140,7 +140,7 @@ class Support : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-            }
+            } */
         }
         return true
     }

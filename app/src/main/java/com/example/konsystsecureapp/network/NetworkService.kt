@@ -12,7 +12,7 @@ import java.io.IOException
 import okhttp3.OkHttpClient
 
 class NetworkService {
-    private val URL: String = "http://88.85.211.234:5085"
+    private val URL: String = "http://192.168.0.100:5085"
     private val client = OkHttpClient()
     private data class AuthRequest(val login: String, val password: String)
     fun authenticate(login: String, password: String, callback: (Boolean, String?) -> Unit) {
